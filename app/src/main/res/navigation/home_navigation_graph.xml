@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation_graph"
+    app:startDestination="@id/action_menu_movies">
+    <fragment
+        android:id="@+id/action_menu_movies"
+        android:name="mx.com.movieschallenge.ui.popular.PopularMoviesFragment"
+        android:label="MoviesFragment"
+        tools:layout="@layout/popular_movies_fragment">
+        <action
+            android:id="@+id/action_moviesFragment_to_favoritesFragment"
+            app:destination="@id/action_menu_favorites" />
+        <action
+            android:id="@+id/action_action_menu_movies_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_menu_favorites"
+        android:name="mx.com.movieschallenge.ui.favorite.FavoritesMoviesFragment"
+        android:label="FavoritesFragment"
+        tools:layout="@layout/favorites_movies_fragment" />
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="mx.com.movieschallenge.ui.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment" />
+
+</navigation>
