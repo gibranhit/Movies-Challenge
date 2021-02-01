@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.DetailMovieActivity"
+    android:background="@color/cardview_dark_background">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/backgroundPoster"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/blurView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4"/>
+
+    <TextView
+        android:id="@+id/tvMovieTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_separation"
+        android:layout_marginEnd="@dimen/small_separation"
+        tools:text="Marvel"
+        android:gravity="center"
+        android:padding="@dimen/big_separation_20"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_list_size_big_20"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/ivMoviePoster"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivMoviePoster"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_poster_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        android:layout_marginStart="@dimen/big_separation"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"/>
+
+    <TextView
+        android:id="@+id/tvTotalPointsItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableStart="@drawable/ic_star_white"
+        android:drawablePadding="@dimen/normal_separation"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_list_size_big"
+        tools:text="120 with 120 votes"
+        android:padding="@dimen/normal_separation"
+        app:layout_constraintTop_toBottomOf="@id/tvMovieTitle"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMovieOverview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Overview"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalPointsItem"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="@dimen/normal_separation"
+        android:textSize="@dimen/text_list_size_normal_16"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
