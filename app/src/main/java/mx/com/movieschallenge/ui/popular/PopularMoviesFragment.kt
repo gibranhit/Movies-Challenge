@@ -12,10 +12,7 @@ import mx.com.movieschallenge.domain.model.Movie
 import mx.com.movieschallenge.ui.listener.MovieCommunication
 import mx.com.movieschallenge.ui.model.FavoriteMoviesViewState
 import mx.com.movieschallenge.ui.model.PopularMoviesViewState
-import mx.com.movieschallenge.utils.extensions.gone
-import mx.com.movieschallenge.utils.extensions.observe
-import mx.com.movieschallenge.utils.extensions.snack
-import mx.com.movieschallenge.utils.extensions.visible
+import mx.com.movieschallenge.utils.extensions.*
 import mx.com.movieschallenge.utils.recyclerview.InfiniteScrollProvider
 import mx.com.movieschallenge.utils.recyclerview.SpacesItemDecoration
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -100,7 +97,15 @@ class PopularMoviesFragment : BaseFragment() {
             is PopularMoviesViewState.OnSuccessFetch -> loadingAnimation.gone()
             is PopularMoviesViewState.OnLoading -> loadingAnimation.visible()
             is PopularMoviesViewState.OnMaxPagesReached -> snack(R.string.message_max_pages_reached)
-            is PopularMoviesViewState.OnError -> snack(R.string.message_error_fetching)
+            is PopularMoviesViewState.OnError -> {
+                loadingAnimation.gone()
+                if (requireActivity().hasNetworkConnection())
+                    snack(R.string.message_error_fetching)
+                else
+                    showAlert(R.string.error_verify_network_connection){
+                        viewModel.fetchPopularMovies()
+                    }
+            }
         }
     }
 

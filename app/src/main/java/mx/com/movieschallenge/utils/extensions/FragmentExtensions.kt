@@ -1,10 +1,16 @@
 package mx.com.movieschallenge.utils.extensions
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.widget.ImageView
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
@@ -15,6 +21,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import mx.com.movieschallenge.R
 
 fun <T> LifecycleOwner.observe(liveData: LiveData<T>, action: (t: T) -> Unit) {
     liveData.observe(this, Observer { it?.let { t -> action(t) } })
@@ -59,3 +66,16 @@ fun Activity.loadImageUrl(image: ImageView, url: String){
         .placeholder(ColorDrawable(Color.parseColor("#8FD8A0")))
         .into(image)
 }
+
+fun Fragment.showAlert(@StringRes message: Int, listener: () -> Unit): AlertDialog =
+    AlertDialog.Builder(requireContext()).run {
+        setTitle(getString(R.string.app_name))
+        setMessage(message)
+
+        setPositiveButton(android.R.string.ok) { dialog, _ ->
+            listener()
+            dialog.dismiss()
+        }
+        show()
+    }
+

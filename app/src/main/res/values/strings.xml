@@ -8,4 +8,5 @@
     <string name="message_success_add_favorites">Added to favorites successfully</string>
     <string name="message_success_remove_favorites">Removed from favorites successfully</string>
     <string name="text_empty_favorites">Your favorite movies will appear here</string>
+    <string name="error_verify_network_connection">Ha ocurrido un error de conexión a internet, por favor revisa tu conexión.</string>
 </resources>

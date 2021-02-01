@@ -3,9 +3,6 @@ package mx.com.movieschallenge.ui.popular
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.switchMap
-import kotlinx.coroutines.flow.MutableStateFlow
 import mx.com.movieschallenge.base.BaseViewModel
 import mx.com.movieschallenge.domain.model.Movie
 import mx.com.movieschallenge.domain.usecase.GetPopularMoviesUseCase
@@ -19,8 +16,6 @@ class PopularMoviesViewModel(private val useCase: GetPopularMoviesUseCase) : Bas
     private var _popularViewState = MutableLiveData<PopularMoviesViewState>()
     private var _popularMovies = MutableLiveData<List<Movie>>()
     private var _favoriteViewState = MutableLiveData<FavoriteMoviesViewState>()
-
-    private val movieIdStateFlow: MutableStateFlow<Int> = MutableStateFlow(0)
 
     //Public fields
     var currentPage: Int = 1
@@ -38,17 +33,13 @@ class PopularMoviesViewModel(private val useCase: GetPopularMoviesUseCase) : Bas
         fetchPopularMovies()
     }
 
-    //Functions
     fun fetchPopularMovies() {
         when {
-            canLoadMoreMovies(currentPage) -> sendPopularMoviesDB()
+            canLoadMoreMovies(currentPage) -> getPopularMoviesDB()
             else -> _popularViewState.postValue(PopularMoviesViewState.OnMaxPagesReached)
         }
     }
 
-    /**
-     * Update favorite movies status.
-     */
     fun updateFavorite(id: Long, isFavorite: Boolean) {
         main {
             runCatching {
@@ -61,10 +52,7 @@ class PopularMoviesViewModel(private val useCase: GetPopularMoviesUseCase) : Bas
         }
     }
 
-    /**
-     * Method to get popular movies.
-     */
-    fun sendPopularMoviesDB() {
+    private fun getPopularMoviesDB() {
         _popularViewState.postValue(PopularMoviesViewState.OnLoading)
         main {
             runCatching {
@@ -75,7 +63,7 @@ class PopularMoviesViewModel(private val useCase: GetPopularMoviesUseCase) : Bas
                     _popularMovies.postValue(it)
                     _popularViewState.postValue(PopularMoviesViewState.OnSuccessFetch(currentPage))
                 } else {
-                    sendPopularMoviesRequest()
+                    getPopularMoviesRequest()
                 }
             }.onFailure {
                 _popularViewState.postValue(PopularMoviesViewState.OnError)
@@ -83,21 +71,18 @@ class PopularMoviesViewModel(private val useCase: GetPopularMoviesUseCase) : Bas
         }
     }
 
-    private fun sendPopularMoviesRequest() {
+    private fun getPopularMoviesRequest() {
         main {
             runCatching {
                 useCase.getPopularMoviesNetwork(page = currentPage)
             }.onSuccess {
-                sendPopularMoviesDB()
+                getPopularMoviesDB()
             }.onFailure {
                 _popularViewState.postValue(PopularMoviesViewState.OnError)
             }
         }
     }
 
-    /**
-     * Method to verify if the user can request more pages.
-     */
     private fun canLoadMoreMovies(currentPage: Int) = currentPage < Constants.MAX_PAGES
 
 }
