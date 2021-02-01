@@ -55,4 +55,4 @@ Hector Gibran Reyes Alvarez
 ## Screenshot
 <img src="https://github.com/gibranhit/Movies-Challenge/blob/master/peliculas_populares.jpeg" width="300" height="600" title="hover text">
 <img src="https://github.com/gibranhit/Movies-Challenge/blob/master/peliculas_favoritas.jpeg" width="300" height="600" title="hover text">
-<img src="https://github.com/gibranhit/Movies-Challenge/blob/master/detalles_peliculas.jpeg" width="300" height="600" title="hover text">
+<img src="https://github.com/gibranhit/Movies-Challenge/blob/master/detalles_pelicula.jpeg" width="300" height="600" title="hover text">
