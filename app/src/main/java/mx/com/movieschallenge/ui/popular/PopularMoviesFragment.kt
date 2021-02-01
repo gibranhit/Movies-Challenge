@@ -2,9 +2,7 @@ package mx.com.movieschallenge.ui.popular
 
 import android.content.Context
 import android.content.res.Configuration
-import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.transition.platform.MaterialElevationScale
 import kotlinx.android.synthetic.main.popular_movies_fragment.*
 import mx.com.movieschallenge.R
 import mx.com.movieschallenge.base.BaseFragment
