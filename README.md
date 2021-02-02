@@ -11,7 +11,7 @@ Just one step to clone the repo as below
 ```bash
 git clone https://github.com/gibranhit/Movies-Challenge.git
 ```
-It's recommend to have the latest version of android studio **3.5.1**
+It's recommend to have the latest version of android studio **4.1.2**
 
 
 ## Project structure
